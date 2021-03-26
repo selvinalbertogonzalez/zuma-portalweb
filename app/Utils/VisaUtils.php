@@ -23,7 +23,7 @@ class VisaUtils {
                 "VERPOS" => "1.0.0.15",
             ],
         ];
-        $client = new Client(['base_uri' => 'https://epaytestvisanet.com.gt:4433']);
+        $client = new Client(['base_uri' => env('VISA_URL')]);
         try {
             $response = $client->request('POST', '/api/paymentretail/AuthorizationRequest', ['json' => $requestBody]);
             $responseBody = json_decode($response->getBody()->getContents(), true);
@@ -35,6 +35,8 @@ class VisaUtils {
                 return ['success' => 0, 'message' => $responseBody['Privateuse63']['Alternatehostresponse22']];
             }
         } catch (ClientException $e) {
+            dump($e);
+
             return ['success' => 0, 'message' => 'client_error'];
         } catch (Exception $e) {
             return ['success' => 0, 'message' => 'unknown_error'];
@@ -120,7 +122,7 @@ class VisaUtils {
                 ],
             ],
         ];
-        $client = new Client(['base_uri' => 'https://epaytestvisanet.com.gt:4433']);
+        $client = new Client(['base_uri' => env('VISA_URL')]);
         try {
             $response = $client->request('POST', '/api/paymentretail/AuthorizationRequest', ['json' => $requestBody]);
             $responseBody = json_decode($response->getBody()->getContents(), true);
