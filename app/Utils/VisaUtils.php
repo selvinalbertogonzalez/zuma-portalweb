@@ -5,6 +5,7 @@ use App\ZumaUser;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use Log;
 
 class VisaUtils {
     public static function getCredentials($user, $password, $serial, $affiliation) {
@@ -35,7 +36,7 @@ class VisaUtils {
                 return ['success' => 0, 'message' => $responseBody['Privateuse63']['Alternatehostresponse22']];
             }
         } catch (ClientException $e) {
-            dump($e);
+            Log::info($e->getResponse()->getBody());
 
             return ['success' => 0, 'message' => 'client_error'];
         } catch (Exception $e) {
@@ -133,6 +134,8 @@ class VisaUtils {
                 return ['success' => 0, 'message' => $responseBody['Privateuse63']['Alternatehostresponse22']];
             }
         } catch (ClientException $e) {
+            Log::info($e->getResponse()->getBody());
+
             return ['success' => 0, 'message' => 'client_error'];
         } catch (Exception $e) {
             return ['success' => 0, 'message' => 'unknown_error'];
