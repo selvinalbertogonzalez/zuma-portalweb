@@ -140,6 +140,7 @@ export default {
         .post("/zuma/visa-config/generate-credentials", {
           email: this.email,
           serial: this.serial,
+          user: this.user,
           affiliation: this.affiliation,
           password: this.password
         })
