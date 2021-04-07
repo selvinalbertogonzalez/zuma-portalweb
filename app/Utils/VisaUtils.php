@@ -21,6 +21,7 @@ class VisaUtils {
             "CONFIGTERMINALID" => [
                 "USER" => $user,
                 "PASSWORD" => $password,
+                "CAJAMULTIPLE" => "",
                 "NAMEPOS" => "APPMOBILE",
                 "VERPOS" => "1.0.0.15",
             ],
