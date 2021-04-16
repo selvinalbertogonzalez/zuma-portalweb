@@ -26,7 +26,12 @@ class VisaUtils {
                 "VERPOS" => "1.0.0.15",
             ],
         ];
-        $client = new Client(['base_uri' => env('VISA_URL')]);
+        $client = new Client([
+            'base_uri' => env('VISA_URL'),
+            'curl' => [
+                CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1_2,
+            ],
+        ]);
         try {
             $response = $client->request('POST', '/api/paymentretail/AuthorizationRequest', ['json' => $requestBody]);
             $responseBody = json_decode($response->getBody()->getContents(), true);
