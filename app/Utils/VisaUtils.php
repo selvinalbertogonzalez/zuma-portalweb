@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Utils;
-use App\ZumaUser;
 use Exception;
+use App\ZumaUser;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Log;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
-use Log;
+// use Log;
 
 class VisaUtils {
     public static function getCredentials($user, $password, $serial, $affiliation) {
@@ -28,9 +29,9 @@ class VisaUtils {
         ];
         $client = new Client([
             'base_uri' => env('VISA_URL'),
-            'curl' => [
-                CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1_2,
-            ],
+            // 'curl' => [
+            //     CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1_2,
+            // ],
         ]);
         try {
             $response = $client->request('POST', '/api/paymentretail/AuthorizationRequest', ['json' => $requestBody]);

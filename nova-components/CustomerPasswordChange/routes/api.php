@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::post('/', function (Request $request) {
     $user = \App\ZumaUser::find($request->id);
-    $user->Contrasena = $request->password;
+    $user->Contrasena = bcrypt($request->password);
     $user->save();
 
     return response()->json(['message' => 'updated_successfully']);
